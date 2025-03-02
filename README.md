@@ -16,6 +16,6 @@ Technologies Used
 **Vite: For fast build and development environment.**
 **Jest: For unit and integration tests.**
 **GitHub Actions: For CI/CD.**
-**Vercel: For deploying the application (currently commented out in the code).**
+**Vercel: For deploying the application (currently commented out in the main.yml file).**
 
 Every time a commit is pushed to the master branch, tests are run automatically, and if all tests pass, the app is deployed to Vercel (deployment is commented out at this time, but turned on by simply removing the hash tags on the CD section of main.yml
