@@ -1,0 +1,48 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  ci:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Run tests
+        run: npm run test
+
+#  cd:
+#    name: Deploy to Vercel
+#    needs: ci
+#    runs-on: ubuntu-latest
+#    if: github.ref == 'refs/heads/master'
+
+#    steps:
+#      - name: Checkout Code
+#        uses: actions/checkout@v4
+
+#      - name: Install Vercel CLI
+#        run: npm install -g vercel
+
+#      - name: Deploy to Vercel
+#        run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
