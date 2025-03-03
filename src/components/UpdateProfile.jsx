@@ -61,9 +61,9 @@ function UpdateProfile() {
     }, [email, username, password, storedUser, navigate, t]);
 
     return (
-        <Container className="vh-100 d-flex justify-content-center align-items-center">
-            <Row>
-                <Col md={5}>
+        <Container className="vh-100 d-flex justify-content-center align-items-center w-100">
+            <Row className="w-100">
+                <Col md={8}>
                     <div className="language-switcher mb-3">
                         <Button variant="outline-primary" onClick={() => changeLanguage("en")}>
                             English

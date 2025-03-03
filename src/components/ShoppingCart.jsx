@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addItem, removeItem, checkout } from "../features/cart/cartSlice";
-import { Button, ListGroup, Alert, Row, Col, Card } from "react-bootstrap";
+import { Button, ListGroup, Alert, Row, Col, Card, Container } from "react-bootstrap";
 import { useMemo, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
@@ -50,8 +50,8 @@ const ShoppingCart = () => {
 
     if (totalItems === 0) {
         return (
-            <div>
-                <div className="language-switcher">
+            <Container className="text-center mt-5">
+                <div className="language-switcher mb-3">
                     <Button variant="outline-primary" onClick={() => changeLanguage("en")}>English</Button>
                     <Button variant="outline-secondary" onClick={() => changeLanguage("es")} className="ms-2">Español</Button>
                 </div>
@@ -59,20 +59,20 @@ const ShoppingCart = () => {
                 <Link to="/home">
                     <Button variant="primary">{t("cart.goHome")}</Button>
                 </Link>
-            </div>
+            </Container>
         );
     }
 
     return (
-        <div>
-            <div className="language-switcher">
+        <Container className="text-center mt-5">
+            <div className="language-switcher mb-3">
                 <Button variant="outline-primary" onClick={() => changeLanguage("en")}>English</Button>
                 <Button variant="outline-secondary" onClick={() => changeLanguage("es")} className="ms-2">Español</Button>
             </div>
 
             <h2>{t("cart.title")}</h2>
 
-            <ListGroup>
+            <ListGroup className="mb-4">
                 {Object.entries(cart.items).map(([id, item]) => (
                     <ListGroup.Item key={id} className="d-flex justify-content-between align-items-center">
                         <span>{item.title} - {t("cart.quantity")}: {item.quantity} - {t("cart.price")}: ${item.price}</span>
@@ -84,17 +84,21 @@ const ShoppingCart = () => {
                 ))}
             </ListGroup>
 
-            <Row className="my-3">
+            <Row className="my-3 justify-content-center">
                 <Col xs={12} md={6}>
                     <h5>{t("cart.totalItems")}: {totalItems}</h5>
                     <h5>{t("cart.totalPrice")}: ${totalAmount.toFixed(2)}</h5>
                 </Col>
             </Row>
 
-            <Button variant="primary" onClick={handleCheckout}>{t("cart.checkout")}</Button>
-            <Link to="/home">
-                <Button variant="secondary" className="ms-2">{t("cart.returnHome")}</Button>
-            </Link>
+            <Row className="justify-content-center">
+                <Col xs={12} md={6} className="d-flex justify-content-center gap-3">
+                    <Button variant="primary" onClick={handleCheckout}>{t("cart.checkout")}</Button>
+                    <Link to="/home">
+                        <Button variant="secondary">{t("cart.returnHome")}</Button>
+                    </Link>
+                </Col>
+            </Row>
 
             <hr />
             <h3>{t("cart.orderHistory")}</h3>
@@ -104,7 +108,7 @@ const ShoppingCart = () => {
             ) : orderHistoryError ? (
                 <Alert variant="danger">{orderHistoryError.message}</Alert>
             ) : orderHistory.length > 0 ? (
-                <Row>
+                <Row className="justify-content-center">
                     {orderHistory.map((order) => (
                         <Col key={order.id} sm={12} md={6} lg={4}>
                             <Card className="mb-3">
@@ -123,9 +127,10 @@ const ShoppingCart = () => {
             ) : (
                 <Alert variant="warning">{t("cart.noOrders")}</Alert>
             )}
-        </div>
+        </Container>
     );
 };
 
 export default ShoppingCart;
+
 

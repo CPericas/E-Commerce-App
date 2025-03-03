@@ -7,6 +7,8 @@ import { store } from "./store";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { UserProvider } from "./context/UserContext";
 import "./i18n";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 const queryClient = new QueryClient();
